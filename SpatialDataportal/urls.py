@@ -1,0 +1,16 @@
+
+from django.contrib import admin
+from django.conf.urls.static import static
+from django.urls import path
+from django.conf import settings
+from DataPortal.views import LoginPage, HomePage, SpatialData, AdministrativeBoundaries
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', LoginPage, name='LoginPage'),
+    path('home/', HomePage, name='HomePage'),
+    path('SpatialData/', SpatialData, name='SpatialData'),
+    path('AdministrativeBoundaries/', AdministrativeBoundaries, name='AdministrativeBoundaries'),
+    
+  
+] 

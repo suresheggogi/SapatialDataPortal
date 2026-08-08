@@ -1,0 +1,254 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Base Portal</title>
+    <link rel="stylesheet" href="{% static 'css/SpatialData.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+</head>
+<body>
+    <div class="Accessibility-Toolbar">
+        <a href="#"><i class="fas fa-home"></i></a>
+        <span class="divider"></span>
+        <a href="#">AB</a>
+        <a href="#">A_B</a>
+        <a href="#">A__B</a>
+        <span class="divider"></span>
+        <a href="#">A-</a>
+        <a href="#">A</a>
+        <a href="#">A+</a>
+    </div>
+   
+    <div class="header-title">
+        <div class="Logo-container"><img src="{% static 'images/Telanganalogo.png' %}" alt="" class="Telangana_logo"></div>
+        <h1>GEOSPATIAL DATA PORTAL</h1>       
+    </div>
+
+    <div class="Navigationbar-container">
+        <div class="Navigationbar-items">
+            <!-- <a href="">Home</a> -->
+            <a href="{% url 'HomePage' %}"> Home</a>
+            <a href="{% url 'SpatialData' %}">Spatial Data</a>
+            <a href="">Map Viewer </a>
+            <a href="">Master Plan</a>
+            <a href="">Downlaods</a>
+            <a href="">Metadata</a>
+            <a href="">Reports</a>
+            <a href="">Help</a>
+            <a href="">Contacts</a>
+        </div>
+    </div>
+    <div class="card-container">
+
+    <div class="spatial-card">
+        <div class="icon">
+            🗺️
+        </div>
+
+        <h3>Administrative Boundaries</h3>
+
+        <p>
+            Access district, mandal, village, ward, and municipal boundary
+            datasets for planning, governance, and spatial analysis.
+        </p>
+
+        <ul>
+            <li>✔ District Boundaries</li>
+            <li>✔ Mandal Boundaries</li>
+            <li>✔ Village Boundaries</li>
+            <li>✔ Ward Boundaries</li>
+        </ul>
+  
+        <!-- <button>Explore Dataset</button> -->
+        <!-- <button onclick="window.location.href= '/AdministrativeBoundaries/'"> Explore Dataset </button> -->
+        <button onclick="window.location.href='{% url 'AdministrativeBoundaries' %}'"> Explore Dataset </button>
+
+    </div>
+
+    <div class="spatial-card">
+    <div class="icon">🏡</div>
+
+    <h3>Land Use / Land Cover</h3>
+
+    <p>
+        Access land use and land cover datasets for urban planning,
+        agriculture, environmental monitoring, and resource management.
+    </p>
+
+    <ul>
+        <li>✔ Residential Areas</li>
+        <li>✔ Agricultural Land</li>
+        <li>✔ Industrial Zones</li>
+        <li>✔ Water Bodies</li>
+    </ul>
+
+    <button>Explore Dataset </button>
+    
+
+    </div>
+
+
+    <div class="spatial-card">
+    <div class="icon">🛣️</div>
+
+    <h3>Transportation</h3>
+
+    <p>
+        View transportation networks including roads, railways,
+        airports, and public transport infrastructure.
+    </p>
+
+    <ul>
+        <li>✔ Road Network</li>
+        <li>✔ Railways</li>
+        <li>✔ Bus Routes</li>
+        <li>✔ Airports</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    </div>
+
+
+    <div class="spatial-card">
+    <div class="icon">💧</div>
+
+    <h3>Water Resources</h3>
+
+    <p>
+        Explore rivers, lakes, reservoirs, canals, watersheds,
+        and groundwater resource datasets.
+    </p>
+
+    <ul>
+        <li>✔ Rivers</li>
+        <li>✔ Lakes</li>
+        <li>✔ Reservoirs</li>
+        <li>✔ Watersheds</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    </div>
+
+    <div class="spatial-card">
+    <div class="icon">🌳</div>
+
+    <h3>Forest & Environment</h3>
+
+    <p>
+        Access environmental and forest datasets for conservation,
+        biodiversity, and ecosystem management.
+    </p>
+
+    <ul>
+        <li>✔ Forest Cover</li>
+        <li>✔ Wildlife Areas</li>
+        <li>✔ Protected Zones</li>
+        <li>✔ Green Spaces</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    </div>
+
+    <div class="spatial-card">
+    <div class="icon">🏢</div>
+
+    <h3>Urban Infrastructure</h3>
+
+    <p>
+        Explore urban infrastructure datasets including buildings,
+        utilities, public facilities, and civic infrastructure.
+    </p>
+
+    <ul>
+        <li>✔ Buildings</li>
+        <li>✔ Schools</li>
+        <li>✔ Hospitals</li>
+        <li>✔ Government Offices</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    </div>
+    <div class="spatial-card">
+    <div class="icon">📡</div>
+
+    <h3>Satellite Imagery</h3>
+
+    <p>
+        Access high-resolution satellite imagery for mapping,
+        monitoring, and change detection applications.
+    </p>
+
+    <ul>
+        <li>✔ High Resolution</li>
+        <li>✔ Multispectral</li>
+        <li>✔ Time Series</li>
+        <li>✔ Ortho Imagery</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    </div>
+
+    <div class="spatial-card">
+    <div class="icon">🏞️</div>
+
+    <h3>DEM & Elevation</h3>
+
+    <p>
+        Access Digital Elevation Models and terrain datasets
+        for slope, aspect, watershed, and terrain analysis.
+    </p>
+
+    <ul>
+        <li>✔ DEM</li>
+        <li>✔ Contours</li>
+        <li>✔ Slope</li>
+        <li>✔ Hillshade</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    </div>
+
+    <div class="spatial-card">
+    <div class="icon">🌦️</div>
+
+    <h3>Climate & Weather</h3>
+
+    <p>
+        Access climate and weather datasets including rainfall,
+        temperature, humidity, and weather forecasts.
+    </p>
+
+    <ul>
+        <li>✔ Rainfall</li>
+        <li>✔ Temperature</li>
+        <li>✔ Humidity</li>
+        <li>✔ Weather Stations</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    </div>
+    <div class="spatial-card">
+    <div class="icon">⚡</div>
+
+    <h3>Utilities</h3>
+
+    <p>
+        Explore utility infrastructure datasets including
+        electricity, water supply, sewerage, and gas networks.
+    </p>
+
+    <ul>
+        <li>✔ Power Lines</li>
+        <li>✔ Water Pipelines</li>
+        <li>✔ Sewer Network</li>
+        <li>✔ Gas Distribution</li>
+    </ul>
+
+    <button>Explore Dataset</button>
+    
+    script src="{% static 'js/SpatialData.js' %}"></script>
+    
+ </div>

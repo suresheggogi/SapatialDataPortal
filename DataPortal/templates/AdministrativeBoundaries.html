@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Base Portal</title>
+    <link rel="stylesheet" href="{% static 'css/AdministrativeBoundaries.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+</head>
+<body>
+    <div class="Accessibility-Toolbar">
+        <a href="#"><i class="fas fa-home"></i></a>
+        <span class="divider"></span>
+        <a href="#">AB</a>
+        <a href="#">A_B</a>
+        <a href="#">A__B</a>
+        <span class="divider"></span>
+        <a href="#">A-</a>
+        <a href="#">A</a>
+        <a href="#">A+</a>
+    </div>
+   
+    <div class="header-title">
+        <div class="Logo-container"><img src="{% static 'images/Telanganalogo.png' %}" alt="" class="Telangana_logo"></div>
+        <h1>GEOSPATIAL DATA PORTAL</h1>       
+    </div>
+
+    <div class="Navigationbar-container">
+        <div class="Navigationbar-items">
+            <a href="{% url 'HomePage' %}"> Home</a>
+            <a href="{% url 'SpatialData' %}">Spatial Data</a>
+            <a href="">Map Viewer </a>
+            <a href="">Master Plan</a>
+            <a href="">Downlaods</a>
+            <a href="">Metadata</a>
+            <a href="">Reports</a>
+            <a href="">Help</a>
+            <a href="">Contacts</a>
+        </div>
+
+    </div>
+
+    <div class="grid-container">
+        <div class="grids">
+            <div class="grid-Left">
+
+                <div class="layer-tree">
+
+                    <div class="Administrative" onclick="toggleTree('adminTree',this)">
+                        <i class="fa-solid fa-plus arrow"></i>
+                        <span class="name">Administrative Boundaries</span>
+                        <div class="iCons">
+                            <i class="fa-solid fa-eye"></i>
+                            <i class="fa-solid fa-download"></i>
+                        </div>
+                    </div>
+
+
+                    <div class="children" id="adminTree">
+
+
+                        <div class="child">
+                            <span>State Boundary</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye" onclick="Showlayer(this)"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                         <div class="child">
+                            <span>District Boundary</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+                        <div class="child">
+                            <span>Mandal Boundary</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <span>Village Boundary</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                         <div class="child">
+                            <span>Ward Boundary</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+
+                        </div>
+
+                     </div>
+                     
+                    <!-- ====================================== -->
+                
+                    <div class="BaseMaps" onclick="toggleTree('baseMapsTree',this)">
+                         <i class="fa-solid fa-plus arrow"></i>
+                         <span class="name">Base Maps</span>
+                         <div class="iCons">
+                             <i class="fa-solid fa-eye"></i>
+                             <i class="fa-solid fa-download"></i>
+                         </div>
+                    </div>
+
+
+                    <div class="children" id="baseMapsTree">
+
+                        <div class="child">
+                            <span>Settlements</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                         <div class="child">
+                            <span>Roads</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+                        <div class="child">
+                            <span>Railways</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <span>Water Bodies</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                         <div class="child">
+                            <span>Rivers/Streems</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+
+                        </div>
+
+                     </div>
+                    <!-- ========================== -->
+
+
+                    <div class="LandInformation" onclick="toggleTree('LandInformationTree',this)">
+                         <i class="fa-solid fa-plus arrow"></i>
+                         <span class="name">Land Information</span>
+                         <div class="iCons">
+                             <i class="fa-solid fa-eye"></i>
+                             <i class="fa-solid fa-download"></i>
+                         </div>
+                    </div>
+
+
+                    <div class="children" id="LandInformationTree">
+
+                        <div class="child">
+                            <span>Cadastral Parcels</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                         <div class="child">
+                            <span>Existing Land Use</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+                        <div class="child">
+                            <span>Proposed Land Use</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                     </div>
+                     <!-- ============================= -->
+
+                      <div class="Infrastructure" onclick="toggleTree('InfrastructureTree',this)">
+                         <i class="fa-solid fa-plus arrow"></i>
+                         <span class="name">Infrastructure</span>
+                         <div class="iCons">
+                             <i class="fa-solid fa-eye"></i>
+                             <i class="fa-solid fa-download"></i>
+                         </div>
+                    </div>
+
+
+                    <div class="children" id="InfrastructureTree">
+
+                        <div class="child">
+                            <span>Schools/Colleages</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                         <div class="child">
+                            <span>Hospitals</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+                        <div class="child">
+                            <span>Government Offices</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+                        <div class="child">
+                            <span>Public Utilities</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <span>Public Semipublic</span>
+                            <div class="iCons">
+                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                        </div>
+                     </div>
+                     <!-- ============================= -->
+                </div>
+
+             </div>
+
+        <div class="grid-Right">
+
+    </div>
+    
+    <script src="{% static 'js/AdministrativeBoundaries.js' %}"></script>
+       
+
+</body>

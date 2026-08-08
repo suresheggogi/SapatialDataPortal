@@ -1,0 +1,130 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Base Portal</title>
+    <link rel="stylesheet" href="{% static 'css/HomePage.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    
+</head>
+<body>
+    <div class="Accessibility-Toolbar">
+        <a href="#"><i class="fas fa-home"></i></a>
+        <span class="divider"></span>
+        <a href="#">AB</a>
+        <a href="#">A_B</a>
+        <a href="#">A__B</a>
+        <span class="divider"></span>
+        <a href="#">A-</a>
+        <a href="#">A</a>
+        <a href="#">A+</a>
+    </div>
+   
+    <div class="header-title">
+        <div class="Logo-container"><img src="{% static 'images/Telanganalogo.png'%}" alt="" class="Telangana_logo"></div>
+        <h1>GEOSPATIAL DATA PORTAL</h1>       
+    </div>
+
+    <div class="Navigationbar-container">
+        <div class="Navigationbar-items">
+            <a href="">Home</a>
+            <a href="{% url 'SpatialData' %}">Spatial Data</a>
+            <!-- <a href="">Spatial Data</a> -->
+            <a href="">Map Viewer </a>
+            <a href="">Master Plan</a>
+            <a href="">Downlaods</a>
+            <a href="">Metadata</a>
+            <a href="">Reports</a>
+            <a href="">Help</a>
+            <a href="">Contacts</a>
+        </div>
+
+    </div>
+    <div class="grid-container" style="color: rgb(241, 246, 246);">
+        <div class="grid-container-leftbar">
+            
+        </div>
+        <div class="grid-container-rightbar">
+            <p style="text-align: center; font-family: 'Trebuchet MS'; text-decoration: underline;">
+                Geospatial Data Portal
+            </p>
+
+            <p class="text-justify fs-6 lh-lg text-secondary">
+    The <strong>Geospatial Data Portal</strong> is a centralized platform 
+    designed to provide easy access to geospatial information, interactive maps, 
+    satellite imagery, and spatial datasets. It enables users to visualize, 
+    analyze, and download geographic data, supporting informed planning, decision-making, 
+    and research across various sectors.
+    <br>
+    Our portal integrates data from multiple trusted sources
+     and presents it through an intuitive web-based GIS interface, 
+     allowing users to efficiently explore, manage, and interpret 
+     spatial information. Whether you are a government agency, 
+     urban planner, researcher, developer, academic institution, 
+     or student, the portal offers reliable geospatial resources
+      and advanced mapping capabilities to support sustainable development, 
+      infrastructure planning, environmental monitoring, and data-driven governance.
+    </p>
+     <p style="text-align: center; font-family: 'Trebuchet MS'; text-decoration: underline;"> Our Services </p>
+   
+    <p>
+        The Geospatial Data Portal provides a centralized repository 
+        for managing and accessing geospatial information with accuracy, 
+        reliability, and ease of use. It offers up-to-date spatial data through
+        a user-friendly interface, enabling fast access to maps, datasets, 
+        and GIS services. Built on industry standards, the portal ensures secure 
+        data management, high-performance map rendering, and seamless compatibility 
+        across desktops, tablets, and mobile devices, making it an efficient solution
+        for planning, analysis, and informed decision-making.
+    </p>
+
+    <p style="text-align: center; font-family: 'Trebuchet MS'; text-decoration: underline;"> Why Choose Our Portal? </p>
+       
+    <p> ✔ Centralized Data Repository</p>
+    <p> ✔ Interactive Web Maps Visualize spatial information through fast, responsive, and interactive maps.</p>
+    <p> ✔ Satellite & Remote Sensing Data Explore high-resolution satellite imagery and remote sensing products.</p>
+    <p> ✔ Secure Data Management Role-based access control ensures your data remains protected and accessible only to authorized users.</p>
+    <p> ✔ Advanced Search & Discovery Quickly locate maps, layers, datasets, and metadata using intelligent search tools.</p><br>
+    <p> ✔ GIS Analysis Services Uerform spatial analysis, measurements, overlays, and thematic visualization directly within the portal.</p>
+        
+    </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-nav">
+
+        <div class="footer-column">
+            <h3>Contact Info</h3>
+            <p>Email: support@gisportal.com</p>
+            <p>Phone: +91 98765 43210</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Regional Office</h3>
+            <p>Hyderabad, Telangana</p>
+            <p>India - 500081</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <a href="#">Home</a><br>
+            <a href="#">Services</a><br>
+            <a href="#">Contact</a>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <p class="copyright">
+        © 2026 Geospatial Data Portal. All Rights Reserved.
+    </p>
+</footer>
+
+
+
+
+ </body>
