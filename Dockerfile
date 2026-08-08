@@ -1,25 +1,70 @@
-FROM python:3.12-slim
+# Use a smaller, official Python runtime as a parent image
+FROM python:3.10-slim
 
-# Prevent Python from creating .pyc files
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
-
-# Show Python output immediately
 ENV PYTHONUNBUFFERED=1
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy requirements first
-COPY requirements.txt /app/
+# Create a non-root user
+RUN addgroup --system app && adduser --system --group app
 
-# Install Python dependencies
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y libpq-dev gcc python3-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy Django project
+# Copy the project code
 COPY . /app/
 
-# Expose Django port
+# Run database migrations (ignore if database doesn't exist or table exists)
+RUN python manage.py migrate || true
+
+
+# Collect static files
+RUN python manage.py collectstatic --noinput || true
+
+# Change ownership of the files
+RUN chown -R app:app /app
+
+# Switch to the non-root user
+USER app
+
+# Make port 8000 available to the world outside this container
 EXPOSE 8000
 
-# Start Django
+
+
+# Set the Django settings module
+ENV DJANGO_SETTINGS_MODULE=giswebApplciation.settings
+
+# Default command to run the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+
+
+
+# FROM docker.osgeo.org/geoserver:2.28.1
+
+# # Set data directory
+# ENV GEOSERVER_DATA_DIR=/opt/geoserver_data
+
+# # Copy your data
+# COPY geoserver_data/ /opt/geoserver_data/
+
+# USER root
+
+# # Fix permissions
+# RUN chmod -R 777 /opt/geoserver_data && \
+#     chmod 1777 /tmp
+
+# # Expose port
+# EXPOSE 8080
+
