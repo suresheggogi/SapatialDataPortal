@@ -24,8 +24,8 @@ function toggleTree(id, element){
     }
 
 }
+// Eye icon botton functions
 
-// Eye icon Function Calling
 function Showlayer(icon) {
 
     // Get the parent .child div

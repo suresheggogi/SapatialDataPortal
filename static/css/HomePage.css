@@ -2,7 +2,7 @@ body{
     padding: 0;
     margin: 0;
 }
-.Accessibility-Toolbar{
+  .Accessibility-Toolbar{
     width:100%;
     height:46px;
     background:#5a43c8;
@@ -11,7 +11,7 @@ body{
     justify-content: right;
     gap: 20px;
     align-items: center;
-  }
+  } 
 
 .Accessibility-Toolbar a{
     color:#e3eeed;
@@ -36,22 +36,21 @@ body{
     opacity:.8;
 }
 
-.header-title{
+ .header-title{
     display:flex;
     justify-content:center;
     align-items:center;
     position:relative;
     min-height:100px;
-    padding:15px 20px;
+    padding:0 20px;
     background:#eff2f4;
-}
-
-.Logo-container{
+} 
+ .Logo-container{
     position: absolute;
     left: 20px;
     align-items: center;
     
-}
+} 
 .Telangana_logo{
     width:clamp(60px,6vw,90px);
     height:auto;
@@ -60,28 +59,32 @@ body{
 .Telangana_logo:hover{
     transform: scale(1.1);
 }
-.header-title h1{
-    font-size:clamp(24px,2.2vw,40px);
-    text-align:center;
-}
 
+.header-title h1{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+    font-size: 35px;
+    margin: 0;
+    text-align: center;
+}
 
 .Navigationbar-container {
     width: 100%;
     box-sizing: border-box;
-
-    
-}
+    }
 
 .Navigationbar-items {
     display:flex;
     justify-content:center;
     align-items:center;
     flex-wrap:wrap;
-    gap:12px;
-    padding:12px;
+    gap:20px;
     background:#d3d2d7;
-    font-size:clamp(23px,1vw,18px);
+    /* font-size:clamp(23px,1vw,18px); */
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 995;
 }
 .Navigationbar-items a{
    padding:10px 14px;

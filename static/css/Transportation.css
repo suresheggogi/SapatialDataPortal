@@ -1,0 +1,270 @@
+body{
+    margin: 0;
+    padding: 0;
+   
+}
+.Accessibility-Toolbar{
+    width:100%;
+    height:46px;
+    background:#5a43c8;
+    display:flex;
+    justify-content: right;
+    gap: 20px;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+.Accessibility-Toolbar a{
+    color:#e3eeed;
+    text-decoration:none;
+    font-size:14px; 
+    font-weight:100;
+    transition:.3s;
+    
+}
+
+.Accessibility-Toolbar a i{
+    font-size:22px; */
+    
+}
+
+.Accessibility-Toolbar a:hover{
+    color:#71df45;
+}
+
+.divider{
+    width:2px;
+    height:28px;
+    background:#fff;
+    opacity:.8;
+}
+
+.header-title{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    background: #eff2f4;
+    position: fixed;
+    top: 46px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 999;
+    
+}
+
+.Logo-container{
+    position: fixed;
+    left: 20px;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+}
+.Telangana_logo{
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 50px;
+
+}
+.header-title h1{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+    font-size: 35px;
+    margin: 0;
+    text-align: center;
+}
+.Navigationbar-container {
+    width: 100%;
+    height: 70px;
+    background: #1a1822;
+    position: fixed;
+    top: 146px;  
+    left: 0;
+    z-index: 997;
+}
+
+.Navigationbar-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    background:#d3d2d7;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 995;
+    
+}
+.Navigationbar-items a{
+    padding: 15px;
+    align-items: center;
+    text-decoration:none;
+    white-space: nowrap;
+}
+
+
+.Navigationbar-items a:hover{
+    background-color: rgb(171, 174, 167);
+    transition: 0.5s;
+    border-radius: 0px 5px;
+}
+.grid-container{
+    width: 100%;
+    display: flex;
+    /* position: fixed; */
+    padding-top: 216px;
+    box-sizing: border-box;
+    min-height:calc(100vh - 450px);
+}
+
+.grids{
+    display: flex;
+    grid-template-columns: 450px, 1fr;
+    gap: 5px;
+  }
+.grid-Left{
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    min-height: 85vh;
+    border: 1px solid rgb(67, 65, 69);
+}
+
+
+.layer-tree{
+    width:350px;
+    font-family:Segoe UI,Arial,sans-serif;
+    font-size:18px;
+}
+
+.Transportation,
+.BaseMaps,
+.LandInformation,
+.Infrastructure,
+.child{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    /* padding:10px 10px; */
+    
+
+}
+.child:hover{
+    transition: 1s;
+    background-color: #dadcda;
+}
+
+.Transportation,
+.BaseMaps,
+.LandInformation,
+.Infrastructure{
+    padding: 20px;
+    border-radius: 5px;
+    cursor:pointer;
+    font-weight:600;
+    /* background-color: #eae9f0; */
+
+}
+
+.name{
+    
+    flex:1;
+    
+}
+
+.arrow{
+     
+    width:25px;
+    transition:.3s;
+}
+
+.iCons{
+
+    display:flex;
+    gap:18px;
+    font-size:16px;
+
+}
+
+.iCons i{
+
+    cursor:pointer;
+    color:#555;
+
+}
+
+.iCons i:hover{
+
+    color:#391fb8;
+
+}
+
+.children{
+
+    display:none;
+    margin-left:22px;
+
+}
+
+.child{
+
+    padding:15px;
+    
+
+}
+
+.child span{
+    flex:1;
+    margin-left:20px;
+
+}
+.grid-Right{
+    flex: 1;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.Map-Content{
+    width: 300px;
+    min-height: 85vh;
+    border: 1px solid blue;
+}
+.Map-Container{
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 250px;
+    min-height: 20vh;
+    border-radius: 10px;
+    border: 1px solid gray;
+
+}
+label {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    margin: 20px 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    transform: scale(1.2);
+    margin-right: 8px;
+    cursor: pointer;
+}
+#map{
+    width:100%;
+     min-height: 85vh;
+}

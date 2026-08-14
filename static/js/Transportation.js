@@ -1,5 +1,3 @@
-
-
 function toggleTree(id, element){
 
     let tree = document.getElementById(id);
@@ -24,7 +22,6 @@ function toggleTree(id, element){
     }
 
 }
-
 // Eye icon Function Calling
 function Showlayer(icon) {
 

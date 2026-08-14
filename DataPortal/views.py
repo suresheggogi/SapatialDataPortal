@@ -15,3 +15,12 @@ def SpatialData(request):
 
 def AdministrativeBoundaries(request):
     return render(request, 'AdministrativeBoundaries.html')
+
+
+def LandUseLandCover(request):
+    return render(request, 'LandUseLandCover.html')
+
+def Transportation(request):
+    return render(request, 'Transportation.html')
+
+
