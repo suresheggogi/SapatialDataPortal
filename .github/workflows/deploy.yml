@@ -82,7 +82,7 @@ jobs:
             docker image prune -f
 
             # Sync shapefiles to GeoServer
-            rsync -avz -e "ssh -p 27031" ./Geoserver/shapefiles/ root@104.233.209.179:/opt/geoserver/shapefiles/
+            rsync -avz -e "ssh -o StrictHostKeyChecking=no -p 27031" ./Geoserver/shapefiles/ root@104.233.209.179:/opt/geoserver/shapefiles/
         
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
