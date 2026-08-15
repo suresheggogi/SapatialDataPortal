@@ -71,11 +71,11 @@ jobs:
 
             sed -i "s|image: suresheggogi/SpatialDataPortal:.*|image: suresheggogi/SpatialDataPortal:$SHORT_SHA|" /root/docker-compose.yml
 
-            docker compose pull SpatialDataPortal
+            docker compose pull spatialdataportal
 
-            docker compose up -d SpatialDataPortal
+            docker compose up -d spatialdataportal
 
-            docker rmi root-SpatialDataPortal:latest 2>/dev/null || true
+            docker rmi root-spatialdataportal:latest 2>/dev/null || true
 
             docker images suresheggogi/SpatialDataPortal -q | awk '!seen[$0]++' | tail -n +2 | xargs -r docker rmi
 

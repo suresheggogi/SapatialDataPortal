@@ -67,8 +67,12 @@ WSGI_APPLICATION = 'SpatialDataportal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'geodb_0hyd',
+        'USER': 'geodb_0hyd_user',
+        'PASSWORD': 'RLzoieV1g6cJYmi5ZUvLuVK9rxhLdCqm',
+        'HOST': 'postgis',
+        'PORT': '5432',
     }
 }
 
