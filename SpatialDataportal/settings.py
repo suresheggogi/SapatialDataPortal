@@ -16,7 +16,8 @@ SECRET_KEY = 'django-insecure-%5$%rfk774x85lo1x=t=_a58x9$2dn2$7svp$&_(be7ow49_m_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Allow hosts from environment variable, fallback to known hosts
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if os.environ.get('DJANGO_ALLOWED_HOSTS') else ['104.233.209.179', 'localhost', '127.0.0.1', 'spatialcity.dpdns.org']
 
 
 # Application definition
