@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  DOCKER_IMAGE: suresheggogi/SpatialDataPortal
+  DOCKER_IMAGE: suresheggogi/spatialdataportal
 
 jobs:
   build-and-deploy:
@@ -69,7 +69,7 @@ jobs:
 
             cd /root
 
-            sed -i "s|image: suresheggogi/SpatialDataPortal:.*|image: suresheggogi/SpatialDataPortal:$SHORT_SHA|" /root/docker-compose.yml
+            sed -i "s|image: suresheggogi/spatialdataportal:.*|image: suresheggogi/spatialdataportal:$SHORT_SHA|" /root/docker-compose.yml
 
             docker compose pull spatialdataportal
 
@@ -77,7 +77,7 @@ jobs:
 
             docker rmi root-spatialdataportal:latest 2>/dev/null || true
 
-            docker images suresheggogi/SpatialDataPortal -q | awk '!seen[$0]++' | tail -n +2 | xargs -r docker rmi
+            docker images suresheggogi/spatialdataportal -q | awk '!seen[$0]++' | tail -n +2 | xargs -r docker rmi
 
             docker image prune -f
         env:
