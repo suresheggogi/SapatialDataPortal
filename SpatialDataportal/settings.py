@@ -2,6 +2,10 @@
 
 from pathlib import Path
 import os
+import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -67,14 +71,7 @@ WSGI_APPLICATION = 'SpatialDataportal.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'geodb_0hyd',
-        'USER': 'geodb_0hyd_user',
-        'PASSWORD': 'RLzoieV1g6cJYmi5ZUvLuVK9rxhLdCqm',
-        'HOST': 'postgis',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')
 }
 
 
