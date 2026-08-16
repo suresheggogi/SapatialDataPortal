@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  DOCKER_IMAGE: suresheggogi/SpatialDataPortal
+  DOCKER_IMAGE: suresheggogi/spatialdataportal
 
 jobs:
   build-and-deploy:
@@ -62,24 +62,31 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22222
+          port: 27031
           envs: DOCKER_USERNAME,DOCKER_PASSWORD,SHORT_SHA
           script: |
+            # Add host key to known_hosts to avoid verification issues
+            ssh-keyscan -p 27031 104.233.209.179 >> /root/.ssh/known_hosts 2>/dev/null || true
+            
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
             cd /root
 
-            sed -i "s|image: suresheggogi/SpatialDataPortal:.*|image: suresheggogi/SpatialDataPortal:$SHORT_SHA|" /root/docker-compose.yml
+            sed -i "s|image: suresheggogi/spatialdataportal:.*|image: suresheggogi/spatialdataportal:$SHORT_SHA|" /root/docker-compose.yml
 
-            docker compose pull SpatialDataPortal
+            docker compose pull spatialdataportal
 
-            docker compose up -d SpatialDataPortal
+            docker compose up -d spatialdataportal
 
-            docker rmi root-SpatialDataPortal:latest 2>/dev/null || true
+            docker rmi root-spatialdataportal:latest 2>/dev/null || true
 
-            docker images suresheggogi/SpatialDataPortal -q | awk '!seen[$0]++' | tail -n +2 | xargs -r docker rmi
+            docker images suresheggogi/spatialdataportal -q | awk '!seen[$0]++' | tail -n +2 | xargs -r docker rmi
 
             docker image prune -f
+
+            # Sync shapefiles to GeoServer
+            scp -r ./Geoserver/shapefiles/* root@104.233.209.179:/opt/geoserver/shapefiles/
+        
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
