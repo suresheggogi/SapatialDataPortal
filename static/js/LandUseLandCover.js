@@ -40,6 +40,14 @@ function Showlayer(icon) {
 
     if (icon.classList.contains("fa-eye")) {
         console.log(layerName + " Layer On");
+        stateBoundaryLayer = L.tileLayer.wms(wmsUrl, {
+            layers: geoLayer,
+            format: "image/png",
+            transparent: true,
+            version: "1.1.1"
+        });
+
+        stateBoundaryLayer.addTo(map);
     } else {
         console.log(layerName + " Layer Off");
     }
