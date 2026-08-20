@@ -102,8 +102,6 @@ var villageBoundaryLayer = L.tileLayer.wms(
 
 
 // Add WMS by default
-stateBoundaryLayer.addTo(map);
-districtBoundaryLayer.addTo(map);
 villageBoundaryLayer.addTo(map);
 map.fitBounds([
     [18.70, 78.85],
