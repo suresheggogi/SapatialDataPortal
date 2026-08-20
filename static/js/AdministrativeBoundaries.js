@@ -58,11 +58,11 @@ var terrainLayer = L.tileLayer(
 );
 
 // Add default basemap
-osmLayer.addTo(map);
+// osmLayer.addTo(map);
 
 
 // ================================
-// STATE BOUNDARY WMS
+// LAYER FILE  BOUNDARY WMS
 // ================================
 var stateBoundaryLayer = L.tileLayer.wms(
     "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
@@ -73,34 +73,93 @@ var stateBoundaryLayer = L.tileLayer.wms(
     }
 );
 
+var districtBoundaryLayer = L.tileLayer.wms(
+    "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
+    {
+        layers: "AdminBoundarys:District_Boundary",
+        format: "image/png",
+        transparent: true
+    }
+);
+
+// var mandalBoundaryLayer = L.tileLayer.wms(
+//     "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
+//     {
+//         layers: "AdminBoundarys:Mancherial",
+//         format: "image/png",
+//         transparent: true
+//     }
+// );
+
+var villageBoundaryLayer = L.tileLayer.wms(
+    "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
+    {
+        layers: "AdminBoundarys:Mancherial",
+        format: "image/png",
+        transparent: true
+    }
+);
+
+
 // Add WMS by default
 stateBoundaryLayer.addTo(map);
-
-// Zoom to State Boundary
+districtBoundaryLayer.addTo(map);
+villageBoundaryLayer.addTo(map);
 map.fitBounds([
-    [15.8, 77.2],   // South-West
-    [19.9, 81.0]    // North-East
+    [18.70, 78.85],
+    [19.45, 79.65]
 ]);
+
+
+
 
 
 // ================================
 // SHOW / HIDE STATE BOUNDARY
 // ================================
-function Showlayer(icon) {
+function Showlayer(icon, layerType) {
+
+    var layer;
+
+    switch(layerType) {
+        case "state":
+            layer = stateBoundaryLayer;
+
+            break;
+
+        case "District":
+            layer = districtBoundaryLayer;
+            districtBoundaryLayer.bringToFront();
+            
+            break;
+
+        // case "Mandal":
+        //     layer = mandalBoundaryLayer;
+        //     break;
+
+        case "Village":
+            layer = villageBoundaryLayer;
+            villageBoundaryLayer.bringToFront();
+            break;
+
+        default:
+            return;
+    }
 
     icon.classList.toggle("fa-eye");
     icon.classList.toggle("fa-eye-slash");
 
     if (icon.classList.contains("fa-eye")) {
 
-        if (!map.hasLayer(stateBoundaryLayer)) {
-            stateBoundaryLayer.addTo(map);
+        if (!map.hasLayer(layer)) {
+            layer.addTo(map);
+            layer.bringToFront();
         }
 
     } else {
 
-        if (map.hasLayer(stateBoundaryLayer)) {
-            map.removeLayer(stateBoundaryLayer);
+        if (map.hasLayer(layer)) {
+            map.removeLayer(layer);
         }
 
     }
