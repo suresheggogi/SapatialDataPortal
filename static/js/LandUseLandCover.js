@@ -30,6 +30,11 @@ function Showlayer(icon) {
 
     // Get the parent .child div
     const child = icon.closest(".child");
+    const layerName = child.dataset.layer;
+    const wmsUrl = child.dataset.wms;
+    const geoLayer = child.dataset.layername;
+
+
 
     // Get the layer name
     const layerName = child.querySelector("span").textContent.trim();
@@ -40,16 +45,25 @@ function Showlayer(icon) {
 
     if (icon.classList.contains("fa-eye")) {
         console.log(layerName + " Layer On");
-        stateBoundaryLayer = L.tileLayer.wms(wmsUrl, {
-            layers: geoLayer,
+        L.tileLayer.wms("http://104.233.209.179:8080/geoserver/AdminBoundarys/wms", {
+            layers: "AdminBoundarys:State_Boundary",
             format: "image/png",
             transparent: true,
-            version: "1.1.1"
-        });
+            version: "1.3.0"
+            }).addTo(map);
 
-        stateBoundaryLayer.addTo(map);
+             // Zoom to your layer
+             map.fitBounds([
+                [15.8, 77.2],   // Southwest (Min Lat, Min Lon)
+                [19.9, 81.0]    // Northeast (Max Lat, Max Lon)
+    ]);
+           
     } else {
         console.log(layerName + " Layer Off");
+        if (stateBoundaryLayer) {
+            map.removeLayer(stateBoundaryLayer);
+            stateBoundaryLayer = null;
+        }
     }
 }
 

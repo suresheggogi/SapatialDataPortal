@@ -1,3 +1,4 @@
+// const { version } = require("react");
 
 
 function toggleTree(id, element){
@@ -39,16 +40,33 @@ function Showlayer(icon) {
     icon.classList.toggle("fa-eye-slash");
 
     if (icon.classList.contains("fa-eye")) {
-        console.log(layerName + " Layer On");
+        stateBoundaryLayer = L.tileLayer.wms(
+        "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
+        {
+            layers: "AdminBoundarys:State_Boundary",
+            format: "image/png",
+            transparent: true
+        }
+    ).addTo(map);
+     // Zoom to your layer
+    map.fitBounds([
+        [15.8, 77.2],   // Southwest (Min Lat, Min Lon)
+        [19.9, 81.0]    // Northeast (Max Lat, Max Lon)
+    ]);
+        
     } else {
-        console.log(layerName + " Layer Off");
+        if (stateBoundaryLayer) {
+        map.removeLayer(stateBoundaryLayer);
+        stateBoundaryLayer = null;
+    }
+       
     }
 }
 
 
 // MAP VIEW
 
-var map = L.map('map').setView([17.3850, 78.4867], 12); // Hyderabad
+var map = L.map('map').setView([17.85, 79.10], 7);
 
 // OSM Layer
 var osmLayer = L.tileLayer(
