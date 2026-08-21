@@ -27,6 +27,21 @@ function toggleTree(id, element) {
 // ================================
 var map = L.map('map');
 
+//==============================
+//ZOOMING
+//=============================
+const layerBounds = {
+    State: L.latLngBounds([12.6, 76.7], [19.9, 84.0]),
+    District: L.latLngBounds([16.0, 78.0], [17.8, 80.2]),
+    Village: L.latLngBounds([18.840267, 79.416114], [18.910657, 79.488692]),
+    Mandal:L.latLngBounds([[18.664696, 78.883718], [19.292326, 79.959857]])
+};
+
+function zoomToLayer(layerName) {
+    if (layerBounds[layerName]) {
+        map.fitBounds(layerBounds[layerName]);
+    }
+}
 // ================================
 // BASE MAPS
 // ================================
@@ -35,7 +50,7 @@ var map = L.map('map');
 var osmLayer = L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
-        maxZoom: 15,
+        maxZoom: 22,
         attribution: '&copy; OpenStreetMap contributors'
     }
 );
@@ -43,7 +58,7 @@ var osmLayer = L.tileLayer(
 // Satellite
 var satelliteLayer = L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    {   maxZoom: 15,
+    {   maxZoom: 22,
         attribution: 'Tiles &copy; Esri'
     }
 );
@@ -52,7 +67,7 @@ var satelliteLayer = L.tileLayer(
 var terrainLayer = L.tileLayer(
     'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
     {
-        maxZoom: 15,
+        maxZoom: 22,
         attribution: '&copy; OpenTopoMap'
     }
 );
@@ -82,14 +97,14 @@ var districtBoundaryLayer = L.tileLayer.wms(
     }
 );
 
-// var mandalBoundaryLayer = L.tileLayer.wms(
-//     "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
-//     {
-//         layers: "AdminBoundarys:Mancherial",
-//         format: "image/png",
-//         transparent: true
-//     }
-// );
+var mandalBoundaryLayer = L.tileLayer.wms(
+    "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
+    {
+        layers: "	AdminBoundarys:Mandal_Boundary",
+        format: "image/png",
+        transparent: true
+    }
+);
 
 var villageBoundaryLayer = L.tileLayer.wms(
     "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
@@ -131,9 +146,9 @@ function Showlayer(icon, layerType) {
             
             break;
 
-        // case "Mandal":
-        //     layer = mandalBoundaryLayer;
-        //     break;
+        case "Mandal":
+            layer = mandalBoundaryLayer;
+            break;
 
         case "Village":
             layer = villageBoundaryLayer;
@@ -229,3 +244,93 @@ function showTerrain() {
         stateBoundaryLayer.bringToFront();
     }
 }
+
+// =====================================
+// GET MANDAL ATTRIBUTES ON CLICK
+// =====================================
+function getFeatureInfo(evt, layer, layerName) {
+
+    var point = map.latLngToContainerPoint(evt.latlng, map.getZoom());
+    var size = map.getSize();
+
+    var url = layer._url + L.Util.getParamString({
+
+        request: "GetFeatureInfo",
+        service: "WMS",
+        srs: "EPSG:4326",
+        styles: "",
+        version: "1.1.1",
+        transparent: true,
+        format: "image/png",
+
+        bbox: map.getBounds().toBBoxString(),
+        width: size.x,
+        height: size.y,
+
+        layers: layerName,
+        query_layers: layerName,
+
+        info_format: "application/json",
+        feature_count: 1,
+
+        x: Math.round(point.x),
+        y: Math.round(point.y)
+
+    });
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.features.length === 0) {
+
+            document.getElementById("attr-table1").innerHTML =
+                "<h3>Attributes</h3><p>No feature selected.</p>";
+
+            return;
+        }
+
+        var properties = data.features[0].properties;
+
+        var html = "<h3>Attributes</h3>";
+
+        html += "<table>";
+        html += "<tr><th>Field</th><th>Value</th></tr>";
+
+        for (var key in properties) {
+
+            html += "<tr>";
+            html += "<td>" + key + "</td>";
+            html += "<td>" + properties[key] + "</td>";
+            html += "</tr>";
+
+        }
+
+        html += "</table>";
+
+        document.getElementById("attr-table1").innerHTML = html;
+
+    })
+    .catch(function(error){
+
+        console.log(error);
+
+        document.getElementById("attr-table1").innerHTML =
+            "<h3>Attributes</h3><p>Error loading attributes.</p>";
+
+    });
+
+}
+map.on("click", function(e){
+
+    if(map.hasLayer(mandalBoundaryLayer)){
+
+        getFeatureInfo(
+            e,
+            mandalBoundaryLayer,
+            "AdminBoundarys:Mandal_Boundary"
+        );
+
+    }
+
+});
