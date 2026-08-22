@@ -25,7 +25,7 @@ function toggleTree(id, element) {
 // ================================
 // MAP
 // ================================
-var map = L.map('map');
+var map = L.map('map').setView([17.1, 79.3], 8);
 
 //==============================
 //ZOOMING
@@ -34,7 +34,7 @@ const layerBounds = {
     State: L.latLngBounds([12.6, 76.7], [19.9, 84.0]),
     District: L.latLngBounds([16.0, 78.0], [17.8, 80.2]),
     Village: L.latLngBounds([18.840267, 79.416114], [18.910657, 79.488692]),
-    Mandal:L.latLngBounds([[18.664696, 78.883718], [19.292326, 79.959857]])
+    Mandal: L.latLngBounds([[18.664696, 78.883718], [19.292326, 79.959857]])
 };
 
 function zoomToLayer(layerName) {
@@ -73,7 +73,7 @@ var terrainLayer = L.tileLayer(
 );
 
 // Add default basemap
-// osmLayer.addTo(map);
+osmLayer.addTo(map);
 
 
 // ================================
@@ -100,7 +100,7 @@ var districtBoundaryLayer = L.tileLayer.wms(
 var mandalBoundaryLayer = L.tileLayer.wms(
     "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
     {
-        layers: "	AdminBoundarys:Mandal_Boundary",
+        layers: "AdminBoundarys:Mandal_Boundary",
         format: "image/png",
         transparent: true
     }
@@ -114,15 +114,17 @@ var villageBoundaryLayer = L.tileLayer.wms(
         transparent: true
     }
 );
-
+var WardBoundaryLayer = L.tileLayer.wms(
+    "http://104.233.209.179:8080/geoserver/AdminBoundarys/wms",
+    {
+        layers: "AdminBoundarys:Ward_Boundary",
+        format: "image/png",
+        transparent: true
+    }
+);
 
 // Add WMS by default
-villageBoundaryLayer.addTo(map);
-map.fitBounds([
-    [18.70, 78.85],
-    [19.45, 79.65]
-]);
-
+// villageBoundaryLayer.addTo(map);
 
 
 
@@ -153,6 +155,12 @@ function Showlayer(icon, layerType) {
         case "Village":
             layer = villageBoundaryLayer;
             villageBoundaryLayer.bringToFront();
+            break;
+
+
+        case "Ward":
+            layer = WardBoundaryLayer;
+            WardBoundaryLayer.bringToFront();
             break;
 
         default:
