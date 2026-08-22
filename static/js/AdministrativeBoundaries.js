@@ -126,9 +126,6 @@ var WardBoundaryLayer = L.tileLayer.wms(
 // Add WMS by default
 // villageBoundaryLayer.addTo(map);
 
-
-
-
 // ================================
 // SHOW / HIDE STATE BOUNDARY
 // ================================
@@ -185,6 +182,109 @@ function Showlayer(icon, layerType) {
 
     }
 }
+
+// map.on("click", function(e) {
+
+//     if (map.hasLayer(villageBoundaryLayer)) {
+//         console.log("function Calling");
+
+//         getFeatureInfo( e, villageBoundaryLayer, "AdminBoundarys:Mancherial" );
+//     }
+
+// });
+
+
+
+ map.on("click", function(e) {
+        console.log("Map clicked");
+
+        if (map.hasLayer(villageBoundaryLayer)) {
+            getFeatureInfo(e, villageBoundaryLayer, "AdminBoundarys:Mancherial");
+            }     
+       
+        });
+
+
+// =====================================
+// GET MANDAL ATTRIBUTES ON CLICK
+// =====================================
+
+function getFeatureInfo(evt, layer, layerName) {
+
+
+    var point = map.latLngToContainerPoint(evt.latlng, map.getZoom());
+    var size = map.getSize();
+
+    var url = layer._url + L.Util.getParamString({
+
+        request: "GetFeatureInfo",
+        service: "WMS",
+        srs: "EPSG:4326",
+        styles: "",
+        version: "1.1.1",
+        transparent: true,
+        format: "image/png",
+
+        bbox: map.getBounds().toBBoxString(),
+        width: size.x,
+        height: size.y,
+
+        layers: layerName,
+        query_layers: layerName,
+
+        info_format: "application/json",
+        feature_count: 1,
+
+        x: Math.round(point.x),
+        y: Math.round(point.y)
+
+    });
+    
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.features.length === 0) {
+
+            document.getElementById("attr-table1").innerHTML =
+                "<h3>Attributes</h3><p>No feature selected.</p>";
+
+            return;
+        }
+
+        var properties = data.features[0].properties;
+
+        var html = "<h3>Attributes</h3>";
+
+        html += "<table>";
+        html += "<tr><th>Field</th><th>Value</th></tr>";
+
+        for (var key in properties) {
+
+            html += "<tr>";
+            html += "<td>" + key + "</td>";
+            html += "<td>" + properties[key] + "</td>";
+            html += "</tr>";
+
+        }
+
+        html += "</table>";
+
+        document.getElementById("attr-table1").innerHTML = html;
+
+    })
+    .catch(function(error){
+
+        console.log(error);
+
+        document.getElementById("attr-table1").innerHTML =
+            "<h3>Attributes</h3><p>Error loading attributes.</p>";
+
+    });
+
+}
+
+
 
 
 // ================================
@@ -253,92 +353,3 @@ function showTerrain() {
     }
 }
 
-// =====================================
-// GET MANDAL ATTRIBUTES ON CLICK
-// =====================================
-function getFeatureInfo(evt, layer, layerName) {
-
-    var point = map.latLngToContainerPoint(evt.latlng, map.getZoom());
-    var size = map.getSize();
-
-    var url = layer._url + L.Util.getParamString({
-
-        request: "GetFeatureInfo",
-        service: "WMS",
-        srs: "EPSG:4326",
-        styles: "",
-        version: "1.1.1",
-        transparent: true,
-        format: "image/png",
-
-        bbox: map.getBounds().toBBoxString(),
-        width: size.x,
-        height: size.y,
-
-        layers: layerName,
-        query_layers: layerName,
-
-        info_format: "application/json",
-        feature_count: 1,
-
-        x: Math.round(point.x),
-        y: Math.round(point.y)
-
-    });
-
-    fetch(url)
-    .then(response => response.json())
-    .then(data => {
-
-        if (data.features.length === 0) {
-
-            document.getElementById("attr-table1").innerHTML =
-                "<h3>Attributes</h3><p>No feature selected.</p>";
-
-            return;
-        }
-
-        var properties = data.features[0].properties;
-
-        var html = "<h3>Attributes</h3>";
-
-        html += "<table>";
-        html += "<tr><th>Field</th><th>Value</th></tr>";
-
-        for (var key in properties) {
-
-            html += "<tr>";
-            html += "<td>" + key + "</td>";
-            html += "<td>" + properties[key] + "</td>";
-            html += "</tr>";
-
-        }
-
-        html += "</table>";
-
-        document.getElementById("attr-table1").innerHTML = html;
-
-    })
-    .catch(function(error){
-
-        console.log(error);
-
-        document.getElementById("attr-table1").innerHTML =
-            "<h3>Attributes</h3><p>Error loading attributes.</p>";
-
-    });
-
-}
-map.on("click", function(e){
-
-    if(map.hasLayer(mandalBoundaryLayer)){
-
-        getFeatureInfo(
-            e,
-            mandalBoundaryLayer,
-            "AdminBoundarys:Mandal_Boundary"
-        );
-
-    }
-
-});
